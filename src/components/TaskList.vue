@@ -1,8 +1,16 @@
 <template>
   <ul>
-    <li>Task # 1</li>
+    <TaskItem />
   </ul>
 </template>
+
+<script>
+import TaskItem from "@/components/TaskItem";
+
+export default {
+  components: { TaskItem }
+};
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
