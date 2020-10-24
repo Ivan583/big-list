@@ -1,19 +1,17 @@
 <template>
   <div id="app">
-    <ul>
-      <li>Task 1</li>
-    </ul>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <TaskList />
+    <!-- msg="Welcome to Your Vue.js App" -->
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import TaskList from "@/components/TaskList.vue";
 
 export default {
   name: "App",
   components: {
-    // HelloWorld
+    TaskList
   }
 };
 </script>
