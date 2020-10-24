@@ -1,5 +1,8 @@
 <template>
-  <div id="app">    
+  <div id="app">
+    <ul>
+      <li>Task 1</li>
+    </ul>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
@@ -8,11 +11,11 @@
 // import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     // HelloWorld
   }
-}
+};
 </script>
 
 <style>
