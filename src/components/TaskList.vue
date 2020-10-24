@@ -2,8 +2,7 @@
   <ul>
     <h1>{{msg}}</h1>
     <hr />
-    {{item}}
-    <TaskItem />
+    <TaskItem v-for="task in item" :key="task.id" :elem="task" />
   </ul>
 </template>
 
