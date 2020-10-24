@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <TaskList />
-    <!-- msg="Welcome to Your Vue.js App" -->
+    <TaskList :item="tasks" msg="Список задач" />
   </div>
 </template>
 
@@ -10,6 +9,15 @@ import TaskList from "@/components/TaskList.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      tasks: [
+        { id: 1, content: "Купить хлеб", stage: "Not Started" },
+        { id: 2, content: "Накормить кота", stage: "Not Started" },
+        { id: 3, content: "Написать проект", stage: "Not Started" }
+      ]
+    };
+  },
   components: {
     TaskList
   }

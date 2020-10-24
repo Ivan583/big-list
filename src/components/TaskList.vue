@@ -1,5 +1,8 @@
 <template>
   <ul>
+    <h1>{{msg}}</h1>
+    <hr />
+    {{item}}
     <TaskItem />
   </ul>
 </template>
@@ -8,6 +11,7 @@
 import TaskItem from "@/components/TaskItem";
 
 export default {
+  props: ["item", "msg"],
   components: { TaskItem }
 };
 </script>
