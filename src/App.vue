@@ -17,26 +17,7 @@ export default {
   name: "App",
   data() {
     return {
-      tasks: [
-        {
-          id: 1,
-          title: "Продовольствие",
-          description: "Купить хлеб",
-          stage: "Pending"
-        },
-        {
-          id: 2,
-          title: "Питомцы",
-          description: "Накормить кота",
-          stage: "Completed"
-        },
-        {
-          id: 3,
-          title: "Деловая",
-          description: "Написать проект",
-          stage: "Started"
-        }
-      ]
+      tasks: []
     };
   },
   components: { TaskList },
@@ -50,6 +31,19 @@ export default {
     removeTask(id) {
       this.tasks = this.tasks.filter(t => t.id !== id);
     }
+  },
+  mounted() {
+    fetch("/tasks.json")
+      .then(res => res.json())
+      .then(data => {
+        setTimeout(() => {
+          this.tasks = data.tasks;
+          this.loading = false;
+        }, 2000);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 </script>
