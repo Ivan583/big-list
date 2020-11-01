@@ -16,7 +16,7 @@ export default {
           id: 1,
           title: "Продовольствие",
           description: "Купить хлеб",
-          stage: "Not Started"
+          stage: "Completed"
         },
         {
           id: 2,
@@ -45,6 +45,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  font-size: 1.2rem;
   color: blue;
   margin-top: 60px;
 }

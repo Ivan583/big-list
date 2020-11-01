@@ -26,21 +26,31 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  methods: {
+    isCompleted(myStatus) {
+      return myStatus.stage === "Completed";
+    }
   }
 };
 </script>
 
 <style scoped>
 li {
-  border: 1px solid green;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 2rem;
   margin-bottom: 1rem;
+  border: 1px solid green;
 }
 
-.title {
+div {
   display: flex;
+}
+
+.box {
+  width: 300px;
 }
 
 button {
@@ -70,7 +80,7 @@ span {
   text-align: left;
 }
 
-.title {
+.heading {
   display: inline-block;
   width: 250px;
 }
