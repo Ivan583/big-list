@@ -3,7 +3,7 @@
     <div>
       <div>
         <button class="start">Start</button>
-        <button class="finish">Finish</button>
+        <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
           <span>
             <strong>{{elem.id}}</strong>

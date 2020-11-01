@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TaskList :item="tasks" msg="Список задач" />
+    <TaskList :item="tasks" msg="Список задач" @finish-task="finishTask" />
   </div>
 </template>
 
@@ -33,8 +33,11 @@ export default {
       ]
     };
   },
-  components: {
-    TaskList
+  components: { TaskList },
+  methods: {
+    finishTask(id) {
+      console.log(id);
+    }
   }
 };
 </script>

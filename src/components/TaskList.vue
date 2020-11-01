@@ -2,7 +2,7 @@
   <ul>
     <h1>{{msg}}</h1>
     <hr />
-    <TaskItem v-for="task in item" :key="task.id" :elem="task" />
+    <TaskItem v-for="task in item" :key="task.id" :elem="task" @finish-task="finishTask" />
   </ul>
 </template>
 
@@ -11,7 +11,12 @@ import TaskItem from "@/components/TaskItem";
 
 export default {
   props: ["item", "msg"],
-  components: { TaskItem }
+  components: { TaskItem },
+  methods: {
+    finishTask(id) {
+      this.$emit("finish-task", id);
+    }
+  }
 };
 </script>
 
