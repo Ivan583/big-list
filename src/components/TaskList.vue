@@ -2,7 +2,13 @@
   <ul>
     <h1>{{msg}}</h1>
     <hr />
-    <TaskItem v-for="task in item" :key="task.id" :elem="task" @finish-task="finishTask" />
+    <TaskItem
+      v-for="task in item"
+      :key="task.id"
+      :elem="task"
+      @finish-task="finishTask"
+      @started-task="startedTask"
+    />
   </ul>
 </template>
 
@@ -15,6 +21,9 @@ export default {
   methods: {
     finishTask(id) {
       this.$emit("finish-task", id);
+    },
+    startedTask(id) {
+      this.$emit("started-task", id);
     }
   }
 };

@@ -2,7 +2,7 @@
   <li>
     <div>
       <div>
-        <button class="start">Start</button>
+        <button class="start" @click="$emit('started-task', elem.id)">Start</button>
         <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
           <span :class="{work: inProgress(elem)}">

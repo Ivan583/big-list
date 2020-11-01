@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <TaskList :item="tasks" msg="Список задач" @finish-task="finishTask" />
+    <TaskList
+      :item="tasks"
+      msg="Список задач"
+      @finish-task="finishTask"
+      @started-task="startedTask"
+    />
   </div>
 </template>
 
@@ -35,6 +40,9 @@ export default {
   },
   components: { TaskList },
   methods: {
+    startedTask(id) {
+      console.log(id);
+    },
     finishTask(id) {
       console.log(id);
     }
