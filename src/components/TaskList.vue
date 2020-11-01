@@ -6,8 +6,9 @@
       v-for="task in item"
       :key="task.id"
       :elem="task"
-      @finish-task="finishTask"
       @started-task="startedTask"
+      @finish-task="finishTask"
+      @remove-task="removeTask"
     />
   </ul>
 </template>
@@ -19,11 +20,14 @@ export default {
   props: ["item", "msg"],
   components: { TaskItem },
   methods: {
+    startedTask(id) {
+      this.$emit("started-task", id);
+    },
     finishTask(id) {
       this.$emit("finish-task", id);
     },
-    startedTask(id) {
-      this.$emit("started-task", id);
+    removeTask(id) {
+      this.$emit("remove-task", id);
     }
   }
 };

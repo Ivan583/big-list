@@ -3,8 +3,9 @@
     <TaskList
       :item="tasks"
       msg="Список задач"
-      @finish-task="finishTask"
       @started-task="startedTask"
+      @finish-task="finishTask"
+      @remove-task="removeTask"
     />
   </div>
 </template>
@@ -45,6 +46,9 @@ export default {
     },
     finishTask(id) {
       console.log(id);
+    },
+    removeTask(id) {
+      this.tasks = this.tasks.filter(t => t.id !== id);
     }
   }
 };
