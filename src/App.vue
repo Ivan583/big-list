@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <TaskList
+      v-if="tasks.length"
       :item="tasks"
       msg="Список задач"
       @started-task="startedTask"
       @finish-task="finishTask"
       @remove-task="removeTask"
     />
+    <h2 v-else>Все задачи выполнены</h2>
   </div>
 </template>
 
