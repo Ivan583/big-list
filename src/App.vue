@@ -16,19 +16,19 @@ export default {
           id: 1,
           title: "Продовольствие",
           description: "Купить хлеб",
-          stage: "Completed"
+          stage: "Pending"
         },
         {
           id: 2,
           title: "Питомцы",
           description: "Накормить кота",
-          stage: "Not Started"
+          stage: "Completed"
         },
         {
           id: 3,
           title: "Деловая",
           description: "Написать проект",
-          stage: "Not Started"
+          stage: "Started"
         }
       ]
     };

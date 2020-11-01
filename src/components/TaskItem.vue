@@ -5,14 +5,14 @@
         <button class="start">Start</button>
         <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
-          <span>
+          <span :class="{work: inProgress(elem)}">
             <strong>{{elem.id}}</strong>
           </span>
-          <span :class="{done: isCompleted(elem) }">{{elem.title}}</span>
+          <span :class="{done: isCompleted(elem), work: inProgress(elem)}">{{elem.title}}</span>
         </div>
       </div>
-      <div>
-        <span :class="{done: isCompleted(elem) }">{{ elem.description }}</span>
+      <div :class="{work: inProgress(elem)}">
+        <span :class="{done: isCompleted(elem), work: inProgress(elem) }">{{ elem.description }}</span>
       </div>
     </div>
     <button class="delete">Delete</button>
@@ -29,6 +29,9 @@ export default {
   },
 
   methods: {
+    inProgress(myStage) {
+      return myStage.stage === "Started";
+    },
     isCompleted(myStatus) {
       return myStatus.stage === "Completed";
     }
@@ -43,6 +46,10 @@ li {
   padding: 0.5rem 2rem;
   margin-bottom: 1rem;
   border: 1px solid green;
+}
+
+.work {
+  color: green;
 }
 
 div {
