@@ -6,7 +6,7 @@
         <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
           <span :class="{work: inProgress(elem)}">
-            <strong>{{elem.id}}</strong>
+            <strong>{{index + 1}}</strong>
           </span>
           <span :class="{done: isCompleted(elem), work: inProgress(elem)}">{{elem.title}}</span>
         </div>
@@ -25,7 +25,8 @@ export default {
     elem: {
       type: Object,
       required: true
-    }
+    },
+    index: Number
   },
 
   methods: {
