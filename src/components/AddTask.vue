@@ -1,5 +1,5 @@
 <template>
-  <form @submit="onSubmit">
+  <form @submit.prevent="onSubmit">
     <fieldset>
       <legend>Новая задача</legend>
       <input type="text" placeholder="Деловая" />
