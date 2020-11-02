@@ -2,8 +2,8 @@
   <form>
     <fieldset>
       <legend>Новая задача</legend>
-      <input type="text" />
-      <input type="text" class="content" />
+      <input type="text" placeholder="Деловая" />
+      <input type="text" class="content" placeholder="Подготовить договор поставки" />
       <button type="submit">Добавить</button>
     </fieldset>
   </form>
