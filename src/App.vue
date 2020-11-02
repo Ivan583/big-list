@@ -1,9 +1,11 @@
 <template>
   <div id="app">
+    <h1>Список задач</h1>
+    <AddTask />
+    <hr />
     <TaskList
       v-if="tasks.length"
       :item="tasks"
-      msg="Список задач"
       @started-task="startedTask"
       @finish-task="finishTask"
       @remove-task="removeTask"
@@ -14,6 +16,7 @@
 
 <script>
 import TaskList from "@/components/TaskList.vue";
+import AddTask from "@/components/AddTask.vue";
 
 export default {
   name: "App",
@@ -22,7 +25,7 @@ export default {
       tasks: []
     };
   },
-  components: { TaskList },
+  components: { TaskList, AddTask },
   methods: {
     startedTask(id) {
       console.log(id);

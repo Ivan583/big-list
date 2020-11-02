@@ -1,7 +1,5 @@
 <template>
   <ul>
-    <h1>{{msg}}</h1>
-    <hr />
     <TaskItem
       v-for="task in item"
       :key="task.id"
