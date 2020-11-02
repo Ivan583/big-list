@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Список задач</h1>
-    <AddTask />
+    <AddTask @add-task="newTask" />
     <hr />
     <TaskList
       v-if="tasks.length"
@@ -35,6 +35,9 @@ export default {
     },
     removeTask(id) {
       this.tasks = this.tasks.filter(t => t.id !== id);
+    },
+    newTask(elem) {
+      this.tasks.push(elem);
     }
   },
   mounted() {

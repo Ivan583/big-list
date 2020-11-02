@@ -6,7 +6,7 @@
       <input
         v-model="description"
         type="text"
-        class="content"
+        class="description"
         placeholder="Подготовить договор поставки"
         required
       />
@@ -25,8 +25,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.title);
-      console.log(this.description);
+      const newTask = {
+        id: Date.now(),
+        title: this.title,
+        description: this.description,
+        stage: "Not Started"
+      };
+      this.$emit("add-task", newTask);
     }
   }
 };
@@ -48,7 +53,7 @@ input {
   margin-bottom: 0.7rem;
 }
 
-.content {
+.description {
   width: 450px;
   /* margin-bottom: 0.4rem; */
 }
