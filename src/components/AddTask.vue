@@ -2,8 +2,8 @@
   <form @submit.prevent="onSubmit">
     <fieldset>
       <legend>Новая задача</legend>
-      <input type="text" placeholder="Деловая" />
-      <input type="text" class="content" placeholder="Подготовить договор поставки" />
+      <input type="text" placeholder="Деловая" required />
+      <input type="text" class="content" placeholder="Подготовить договор поставки" required />
       <button type="submit">Добавить</button>
     </fieldset>
   </form>
