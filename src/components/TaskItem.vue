@@ -5,14 +5,14 @@
         <button class="start" @click="$emit('started-task', elem.id)">Start</button>
         <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
-          <span :class="{work: inProgress(elem)}">
+          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">
             <strong>{{index + 1}}</strong>
           </span>
-          <span :class="{done: isCompleted(elem), work: inProgress(elem)}">{{elem.title}}</span>
+          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{elem.title}}</span>
         </div>
       </div>
       <div :class="{work: inProgress(elem)}">
-        <span :class="{done: isCompleted(elem), work: inProgress(elem) }">{{ elem.description }}</span>
+        <span :class="{work: inProgress(elem),done: isCompleted(elem)}">{{ elem.description }}</span>
       </div>
     </div>
     <button class="delete" @click="$emit('remove-task', elem.id)">Delete</button>
