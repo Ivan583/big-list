@@ -32,6 +32,8 @@ export default {
         stage: "Not Started"
       };
       this.$emit("add-task", newTask);
+      this.title = "";
+      this.description = "";
     }
   }
 };
