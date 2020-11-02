@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit="onSubmit">
     <fieldset>
       <legend>Новая задача</legend>
       <input type="text" placeholder="Деловая" />
@@ -8,6 +8,16 @@
     </fieldset>
   </form>
 </template>
+
+<script>
+export default {
+  methods: {
+    onSubmit() {
+      console.log("Submit");
+    }
+  }
+};
+</script>
 
 <style scoped>
 form {
