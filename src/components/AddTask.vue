@@ -2,8 +2,14 @@
   <form @submit.prevent="onSubmit">
     <fieldset>
       <legend>Новая задача</legend>
-      <input type="text" placeholder="Деловая" required />
-      <input type="text" class="content" placeholder="Подготовить договор поставки" required />
+      <input v-model="title" type="text" placeholder="Деловая" required />
+      <input
+        v-model="description"
+        type="text"
+        class="content"
+        placeholder="Подготовить договор поставки"
+        required
+      />
       <button type="submit">Добавить</button>
     </fieldset>
   </form>
@@ -11,9 +17,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      title: "",
+      description: ""
+    };
+  },
   methods: {
     onSubmit() {
-      console.log("Submit");
+      console.log(this.title);
+      console.log(this.description);
     }
   }
 };
