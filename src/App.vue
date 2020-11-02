@@ -3,8 +3,9 @@
     <h1>Список задач</h1>
     <AddTask @add-task="newTask" />
     <hr />
+    <Loader v-if="loading" />
     <TaskList
-      v-if="tasks.length"
+      v-else-if="tasks.length"
       :item="tasks"
       @started-task="startedTask"
       @finish-task="finishTask"
@@ -17,15 +18,17 @@
 <script>
 import TaskList from "@/components/TaskList.vue";
 import AddTask from "@/components/AddTask.vue";
+import Loader from "@/components/Loader.vue";
 
 export default {
   name: "App",
   data() {
     return {
-      tasks: []
+      tasks: [],
+      loading: true
     };
   },
-  components: { TaskList, AddTask },
+  components: { TaskList, AddTask, Loader },
   methods: {
     startedTask(id) {
       console.log(id);
