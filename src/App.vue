@@ -1,19 +1,62 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Список задач</h1>
+    <AddTask @add-task="newTask" />
+    <hr />
+    <Loader v-if="loading" />
+    <TaskList
+      v-else-if="tasks.length"
+      :item="tasks"
+      @started-task="startedTask"
+      @finish-task="finishTask"
+      @remove-task="removeTask"
+    />
+    <h2 v-else>Все задачи выполнены</h2>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TaskList from "@/components/TaskList.vue";
+import AddTask from "@/components/AddTask.vue";
+import Loader from "@/components/Loader.vue";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  data() {
+    return {
+      tasks: [],
+      loading: true
+    };
+  },
+  components: { TaskList, AddTask, Loader },
+  methods: {
+    startedTask(id) {
+      console.log(id);
+    },
+    finishTask(id) {
+      console.log(id);
+    },
+    removeTask(id) {
+      this.tasks = this.tasks.filter(t => t.id !== id);
+    },
+    newTask(elem) {
+      this.tasks.push(elem);
+    }
+  },
+  mounted() {
+    fetch("/tasks.json")
+      .then(res => res.json())
+      .then(data => {
+        setTimeout(() => {
+          this.tasks = data.tasks;
+          this.loading = false;
+        }, 2000);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-}
+};
 </script>
 
 <style>
@@ -22,7 +65,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  font-size: 1.2rem;
+  color: blue;
   margin-top: 60px;
 }
 </style>
