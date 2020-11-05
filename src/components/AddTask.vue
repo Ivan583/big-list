@@ -2,7 +2,14 @@
   <form @submit.prevent="onSubmit">
     <fieldset>
       <legend>Новая задача</legend>
-      <input v-model="title" type="text" placeholder="Деловая" required />
+      <input
+        v-model="title"
+        type="text"
+        class="title"
+        maxlength="20"
+        placeholder="Деловая"
+        required
+      />
       <input
         v-model="description"
         type="text"
@@ -55,9 +62,12 @@ input {
   margin-bottom: 0.7rem;
 }
 
+.title {
+  width: 260px;
+}
+
 .description {
   width: 450px;
-  /* margin-bottom: 0.4rem; */
 }
 
 button {

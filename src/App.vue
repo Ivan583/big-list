@@ -2,14 +2,21 @@
   <div id="app">
     <h1>Список задач</h1>
     <AddTask @add-task="newTask" />
-    <select v-model="statusFilter">
-      <option value="all">All</option>
-      <option value="completed">Completed</option>
-      <option value="started">Started</option>
-      <option value="pending">Pending</option>
-    </select>
-    <label>Task</label>
-    <input type="text" class="title" v-model.lazy="titleFilter" />
+    <form>
+      <fieldset>
+        <legend>Фильтры</legend>
+        <label>Status</label>
+        <select v-model="statusFilter">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="started">Started</option>
+          <option value="pending">Pending</option>
+        </select>
+        <label>Task</label>
+        <input type="text" class="title" v-model.lazy="titleFilter" />
+      </fieldset>
+    </form>
+
     <hr />
     <Loader v-if="loading" />
     <TaskList
@@ -96,5 +103,24 @@ export default {
   font-size: 1.2rem;
   color: blue;
   margin-top: 60px;
+}
+</style>
+
+<style>
+form {
+  width: 500px;
+  margin: 10px auto 20px;
+}
+
+fieldset,
+select,
+input {
+  border: 2px solid green;
+  font-size: 1.1rem;
+}
+
+select,
+label {
+  margin-right: 0.5rem;
 }
 </style>
