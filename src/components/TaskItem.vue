@@ -31,10 +31,10 @@ export default {
 
   methods: {
     inProgress(myStage) {
-      return myStage.stage === "Started";
+      return myStage.stage === "started";
     },
     isCompleted(myStatus) {
-      return myStatus.stage === "Completed";
+      return myStatus.stage === "completed";
     }
   }
 };

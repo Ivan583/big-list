@@ -29,7 +29,7 @@ export default {
         id: Date.now(),
         title: this.title,
         description: this.description,
-        stage: "Not Started"
+        stage: "pending"
       };
       this.$emit("add-task", newTask);
       this.title = "";

@@ -8,6 +8,8 @@
       <option value="started">Started</option>
       <option value="pending">Pending</option>
     </select>
+    <label>Task</label>
+    <input type="text" class="title" v-model.lazy="titleFilter" />
     <hr />
     <Loader v-if="loading" />
     <TaskList
@@ -32,7 +34,8 @@ export default {
     return {
       tasks: [],
       loading: true,
-      statusFilter: "all"
+      statusFilter: "all",
+      titleFilter: ""
     };
   },
   components: { TaskList, AddTask, Loader },
@@ -54,13 +57,17 @@ export default {
 
   computed: {
     filteredTasks() {
-      if (this.statusFilter === "completed")
-        return this.tasks.filter(t => t.stage === "Completed");
-      if (this.statusFilter === "started")
-        return this.tasks.filter(t => t.stage === "Started");
-      if (this.statusFilter === "pending")
-        return this.tasks.filter(t => t.stage === "Pending");
-      return this.tasks;
+      if (this.statusFilter === "all") {
+        if (this.titleFilter)
+          return this.tasks.filter(t => t.title.includes(this.titleFilter));
+        else return this.tasks;
+      } else {
+        if (this.titleFilter)
+          return this.tasks
+            .filter(t => t.stage === this.statusFilter)
+            .filter(t => t.title.includes(this.titleFilter));
+        else return this.tasks.filter(t => t.stage === this.statusFilter);
+      }
     }
   },
 
