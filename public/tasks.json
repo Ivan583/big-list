@@ -1,21 +1,21 @@
 {
     "tasks": [{
             "id": 1,
-            "title": "Продовольствие",
-            "description": "Купить хлеб",
-            "stage": "Pending"
+            "title": "продовольствие",
+            "description": "купить хлеб",
+            "stage": "pending"
         },
         {
             "id": 2,
-            "title": "Питомцы",
-            "description": "Накормить кота",
-            "stage": "Completed"
+            "title": "питомцы",
+            "description": "накормить кота",
+            "stage": "completed"
         },
         {
             "id": 3,
-            "title": "Деловая",
-            "description": "Написать проект",
-            "stage": "Started"
+            "title": "деловая",
+            "description": "написать проект",
+            "stage": "started"
         }
     ]
 }
