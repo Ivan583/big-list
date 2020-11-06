@@ -2,14 +2,7 @@
   <form @submit.prevent="onSubmit">
     <fieldset>
       <legend>Новая задача</legend>
-      <input
-        v-model="title"
-        type="text"
-        class="title"
-        maxlength="20"
-        placeholder="Деловая"
-        required
-      />
+      <input v-model="title" type="text" maxlength="20" placeholder="Деловая" required />
       <input
         v-model="description"
         type="text"

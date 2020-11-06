@@ -5,14 +5,15 @@
         <button class="start" @click="$emit('started-task', elem.id)">Start</button>
         <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
-          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">
+          <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
             <strong>{{index + 1}}</strong>
           </span>
+          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ localeDate }}</span>
           <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{elem.title}}</span>
         </div>
       </div>
-      <div :class="{work: inProgress(elem)}">
-        <span :class="{work: inProgress(elem),done: isCompleted(elem)}">{{ elem.description }}</span>
+      <div>
+        <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ elem.description }}</span>
       </div>
     </div>
     <button class="delete" @click="$emit('remove-task', elem.id)">Delete</button>
@@ -33,8 +34,13 @@ export default {
     inProgress(myStage) {
       return myStage.stage === "started";
     },
-    isCompleted(myStatus) {
-      return myStatus.stage === "completed";
+    isCompleted(myStage) {
+      return myStage.stage === "completed";
+    }
+  },
+  computed: {
+    localeDate() {
+      return new Date().toLocaleString();
     }
   }
 };
@@ -58,7 +64,7 @@ div {
 }
 
 .box {
-  width: 300px;
+  width: 570px;
 }
 
 button {
@@ -84,8 +90,13 @@ input {
 }
 
 span {
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   text-align: left;
+}
+
+.index {
+  width: 35px;
+  margin-right: 0.5rem;
 }
 
 .heading {
