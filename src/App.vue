@@ -47,8 +47,9 @@ export default {
   components: { TaskList, AddTask },
 
   methods: {
-    startedTask(id) {
-      console.log(id);
+    startedTask(index) {
+      this.tasks[index].stage = "started";
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     finishTask(id) {
       console.log(id);
