@@ -56,8 +56,12 @@ export default {
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     removeTask(index) {
-      this.tasks.splice(index, 1);
-      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      if (this.tasks[index].stage === "completed") {
+        this.tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      } else {
+        alert("Задача не выполнена!");
+      }
     },
     newTask(elem) {
       if (elem != {}) this.tasks.push(elem);
