@@ -16,7 +16,7 @@
         <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ elem.description }}</span>
       </div>
     </div>
-    <button class="delete" @click="$emit('remove-task', elem.id)">Delete</button>
+    <button class="delete" @click="$emit('remove-task', index)">Delete</button>
   </li>
 </template>
 

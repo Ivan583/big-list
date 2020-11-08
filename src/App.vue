@@ -53,8 +53,11 @@ export default {
     finishTask(id) {
       console.log(id);
     },
-    removeTask(id) {
-      this.tasks = this.tasks.filter(t => t.id !== id);
+    removeTask(index) {
+      console.log(index);
+      this.tasks.splice(index, 1);
+      console.log(this.tasks);
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     newTask(elem) {
       if (elem != {}) this.tasks.push(elem);
