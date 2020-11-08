@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Список задач</h1>
-    <AddTask @add-task="newTask" />
+    <add-task @add-task="newTask" />
     <form>
       <fieldset>
         <legend>Фильтры</legend>
@@ -18,9 +18,8 @@
     </form>
 
     <hr />
-    <Loader v-if="loading" />
-    <TaskList
-      v-else-if="filteredTasks.length"
+    <task-list
+      v-if="filteredTasks.length"
       :item="filteredTasks"
       @started-task="startedTask"
       @finish-task="finishTask"
@@ -33,19 +32,19 @@
 <script>
 import TaskList from "@/components/TaskList.vue";
 import AddTask from "@/components/AddTask.vue";
-import Loader from "@/components/Loader.vue";
 
 export default {
   name: "App",
   data() {
     return {
       tasks: [],
+      elem: null,
       loading: true,
       statusFilter: "all",
       titleFilter: ""
     };
   },
-  components: { TaskList, AddTask, Loader },
+  components: { TaskList, AddTask },
 
   methods: {
     startedTask(id) {
@@ -58,7 +57,8 @@ export default {
       this.tasks = this.tasks.filter(t => t.id !== id);
     },
     newTask(elem) {
-      this.tasks.push(elem);
+      if (elem != {}) this.tasks.push(elem);
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     }
   },
 
@@ -78,18 +78,15 @@ export default {
     }
   },
 
-  mounted() {
-    fetch("/tasks.json")
-      .then(res => res.json())
-      .then(data => {
-        setTimeout(() => {
-          this.tasks = data.tasks;
-          this.loading = false;
-        }, 2000);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  async mounted() {
+    try {
+      const data = await localStorage.getItem("tasks");
+      data ? (this.tasks = JSON.parse(data)) : null;
+    } catch (err) {
+      if (err == QUOTA_EXCEEDED_ERR) {
+        alert("quota exceeded");
+      }
+    }
   }
 };
 </script>
