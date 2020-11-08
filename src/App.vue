@@ -51,13 +51,12 @@ export default {
       this.tasks[index].stage = "started";
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
-    finishTask(id) {
-      console.log(id);
+    finishTask(index) {
+      this.tasks[index].stage = "completed";
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     removeTask(index) {
-      console.log(index);
       this.tasks.splice(index, 1);
-      console.log(this.tasks);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     newTask(elem) {
