@@ -13,8 +13,13 @@
           <option value="in work">В работе</option>
           <option value="pending">На очереди</option>
         </select>
-        <label>Task</label>
-        <input type="text" class="title" v-model.lazy="titleFilter" />
+        <label data-tooltip="введите заголовок или его часть и кликните вне поля">Task</label>
+        <input
+          type="text"
+          class="title"
+          placeholder="наведитесь на label"
+          v-model.lazy="titleFilter"
+        />
       </fieldset>
     </form>
 
@@ -182,5 +187,27 @@ label {
 .sort {
   display: flex;
   justify-content: space-around;
+}
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  width: 300px;
+  left: 0;
+  top: 0;
+  padding: 0.5em;
+  color: #fff;
+  background-color: blueviolet;
+  pointer-events: none;
+  opacity: 0;
+  transition: 1s;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  top: 2em;
 }
 </style>
