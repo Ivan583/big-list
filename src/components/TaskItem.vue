@@ -32,7 +32,7 @@ export default {
 
   methods: {
     inProgress(myStage) {
-      return myStage.stage === "started";
+      return myStage.stage === "in work";
     },
     isCompleted(myStage) {
       return myStage.stage === "completed";

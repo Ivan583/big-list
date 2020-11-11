@@ -8,18 +8,13 @@
         <legend>Фильтры</legend>
         <label>Status</label>
         <select v-model="statusFilter">
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="started">Started</option>
-          <option value="pending">Pending</option>
+          <option value="all">Все</option>
+          <option value="completed">Готово</option>
+          <option value="in work">В работе</option>
+          <option value="pending">На очереди</option>
         </select>
         <label>Task</label>
-        <input
-          type="text"
-          class="title"
-          placeholder="enter and click outside"
-          v-model.lazy="titleFilter"
-        />
+        <input type="text" class="title" v-model.lazy="titleFilter" />
       </fieldset>
     </form>
 
@@ -79,7 +74,7 @@ export default {
 
   methods: {
     startedTask(index) {
-      this.tasks[index].stage = "started";
+      this.tasks[index].stage = "in work";
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     finishTask(index) {
@@ -102,35 +97,43 @@ export default {
 
   computed: {
     filteredTasks() {
-      if (this.statusFilter === "all")
+      let arr;
+      if (this.statusFilter === "all") {
         if (this.titleFilter)
-          return this.tasks.filter(t => t.title.includes(this.titleFilter));
-        else return this.tasks;
-      else if (this.titleFilter)
-        return this.tasks
-          .filter(t => t.stage === this.statusFilter)
-          .filter(t => t.title.includes(this.titleFilter));
-      else return this.tasks.filter(t => t.stage === this.statusFilter);
+          arr = this.tasks.filter(t => t.title.includes(this.titleFilter));
+        else arr = this.tasks;
+      } else {
+        if (this.titleFilter)
+          arr = this.tasks
+            .filter(t => t.stage === this.statusFilter)
+            .filter(t => t.title.includes(this.titleFilter));
+        else arr = this.tasks.filter(t => t.stage === this.statusFilter);
+      }
+      console.log(arr);
+      if (arr) {
+        let sortedArray = arr.slice(0);
+        let sortByTitle = (d1, d2) => {
+          return d1.title.toLowerCase() > d2.title.toLowerCase() ? 1 : -1;
+        };
+        let sortByStatus = (d1, d2) => {
+          return d1.stage > d2.stage ? 1 : -1;
+        };
+        let sortByDate = (d1, d2) => {
+          return d1.id > d2.id ? 1 : -1;
+        };
+
+        switch (this.order.method) {
+          case "По заголовку":
+            return arr.sort(sortByTitle);
+            break;
+          case "По статусу":
+            return arr.sort(sortByStatus);
+            break;
+          default:
+            return arr.sort(sortByDate);
+        }
+      }
     }
-
-    // if (this.tasks.lengtn) {
-    //   let tasksArray = this.tasks.slice(0);
-    // }
-    // switch (this.order.method) {
-    //   case "По заголовку":
-    //   function compare(d1, d2)
-    //   return (d1.title.toLowerCase() > d2.title.toLowerCase() ? 1 : -1);
-    //   break;
-
-    //   case "По статусу":
-    //   function compare(d1, d2)
-    //   return (d1.stage > d2.stage ? 1 : -1);
-    //   break;
-
-    //   default:
-    //   function compare(d1, d2)
-    //   return (d1.id > d2.id ? 1 : -1);
-    // }
   },
 
   async mounted() {
