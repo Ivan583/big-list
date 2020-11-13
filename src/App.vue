@@ -47,7 +47,7 @@
     <task-list
       v-if="filteredTasks.length"
       :item="filteredTasks"
-      @started-task="startedTask"
+      @started-task="startTask"
       @finish-task="finishTask"
       @remove-task="removeTask"
     />
@@ -77,12 +77,20 @@ export default {
   components: { TaskList, AddTask },
 
   methods: {
-    startedTask(index) {
-      this.tasks[index].stage = "in work";
+    startTask(id) {
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              stage: "in work"
+            }
+          : el
+      );
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     finishTask(index) {
       this.tasks[index].stage = "completed";
+      // console.log(this.tasks);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     removeTask(id, stage) {

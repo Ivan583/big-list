@@ -19,8 +19,8 @@ export default {
   props: ["item", "msg"],
   components: { TaskItem },
   methods: {
-    startedTask(index) {
-      this.$emit("started-task", index);
+    startedTask(id) {
+      this.$emit("started-task", id);
     },
     finishTask(index) {
       this.$emit("finish-task", index);
