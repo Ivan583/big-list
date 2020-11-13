@@ -88,9 +88,15 @@ export default {
       );
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
-    finishTask(index) {
-      this.tasks[index].stage = "completed";
-      // console.log(this.tasks);
+    finishTask(id) {
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              stage: "completed"
+            }
+          : el
+      );
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     removeTask(id, stage) {

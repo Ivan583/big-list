@@ -22,8 +22,8 @@ export default {
     startedTask(id) {
       this.$emit("started-task", id);
     },
-    finishTask(index) {
-      this.$emit("finish-task", index);
+    finishTask(id) {
+      this.$emit("finish-task", id);
     },
     removeTask(id, stage) {
       this.$emit("remove-task", id, stage);

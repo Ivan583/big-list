@@ -3,7 +3,7 @@
     <div>
       <div>
         <button class="start" @click="$emit('started-task', elem.id)">Start</button>
-        <button class="finish" @click="$emit('finish-task', index)">Finish</button>
+        <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
           <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
             <strong>{{index + 1}}</strong>
