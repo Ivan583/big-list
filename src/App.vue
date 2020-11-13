@@ -47,7 +47,7 @@
     <task-list
       v-if="filteredTasks.length"
       :item="filteredTasks"
-      @started-task="startedTask"
+      @started-task="startTask"
       @finish-task="finishTask"
       @remove-task="removeTask"
     />
@@ -64,7 +64,6 @@ export default {
   data() {
     return {
       tasks: [],
-      elem: null,
       order: {
         method: "По времени",
         date: "По времени",
@@ -78,17 +77,31 @@ export default {
   components: { TaskList, AddTask },
 
   methods: {
-    startedTask(index) {
-      this.tasks[index].stage = "in work";
+    startTask(id) {
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              stage: "in work"
+            }
+          : el
+      );
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
-    finishTask(index) {
-      this.tasks[index].stage = "completed";
+    finishTask(id) {
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              stage: "completed"
+            }
+          : el
+      );
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
-    removeTask(index) {
-      if (this.tasks[index].stage === "completed") {
-        this.tasks.splice(index, 1);
+    removeTask(id, stage) {
+      if (stage === "completed") {
+        this.tasks = this.tasks.filter(t => t.id != id);
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
       } else {
         alert("Задача не выполнена!");
@@ -114,7 +127,6 @@ export default {
             .filter(t => t.title.includes(this.titleFilter));
         else arr = this.tasks.filter(t => t.stage === this.statusFilter);
       }
-      console.log(arr);
       if (arr) {
         let sortedArray = arr.slice(0);
         let sortByTitle = (d1, d2) => {

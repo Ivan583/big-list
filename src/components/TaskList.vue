@@ -19,14 +19,14 @@ export default {
   props: ["item", "msg"],
   components: { TaskItem },
   methods: {
-    startedTask(index) {
-      this.$emit("started-task", index);
+    startedTask(id) {
+      this.$emit("started-task", id);
     },
-    finishTask(index) {
-      this.$emit("finish-task", index);
+    finishTask(id) {
+      this.$emit("finish-task", id);
     },
-    removeTask(index) {
-      this.$emit("remove-task", index);
+    removeTask(id, stage) {
+      this.$emit("remove-task", id, stage);
     }
   }
 };

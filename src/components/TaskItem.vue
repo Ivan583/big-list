@@ -2,8 +2,8 @@
   <li>
     <div>
       <div>
-        <button class="start" @click="$emit('started-task', index)">Start</button>
-        <button class="finish" @click="$emit('finish-task', index)">Finish</button>
+        <button class="start" @click="$emit('started-task', elem.id)">Start</button>
+        <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
           <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
             <strong>{{index + 1}}</strong>
@@ -16,7 +16,7 @@
         <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ elem.description }}</span>
       </div>
     </div>
-    <button class="delete" @click="$emit('remove-task', index)">Delete</button>
+    <button class="delete" @click="$emit('remove-task', elem.id, elem.stage)">Delete</button>
   </li>
 </template>
 
