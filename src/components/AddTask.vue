@@ -26,7 +26,7 @@ export default {
   methods: {
     onSubmit() {
       const newTask = {
-        id: Date.now(),
+        id: Date.now().toString(),
         title: this.title,
         description: this.description,
         stage: "pending"

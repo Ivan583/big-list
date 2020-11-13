@@ -64,7 +64,6 @@ export default {
   data() {
     return {
       tasks: [],
-      elem: null,
       order: {
         method: "По времени",
         date: "По времени",
@@ -86,9 +85,9 @@ export default {
       this.tasks[index].stage = "completed";
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
-    removeTask(index) {
-      if (this.tasks[index].stage === "completed") {
-        this.tasks.splice(index, 1);
+    removeTask(id, stage) {
+      if (stage === "completed") {
+        this.tasks = this.tasks.filter(t => t.id != id);
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
       } else {
         alert("Задача не выполнена!");
@@ -114,7 +113,6 @@ export default {
             .filter(t => t.title.includes(this.titleFilter));
         else arr = this.tasks.filter(t => t.stage === this.statusFilter);
       }
-      console.log(arr);
       if (arr) {
         let sortedArray = arr.slice(0);
         let sortByTitle = (d1, d2) => {
