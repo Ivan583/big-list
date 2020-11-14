@@ -1,14 +1,6 @@
 <template>
   <ul>
-    <task-item
-      v-for="(task, i) in item"
-      :key="task.id"
-      :elem="task"
-      :index="i"
-      @started-task="startedTask"
-      @finish-task="finishTask"
-      @remove-task="removeTask"
-    />
+    <task-item v-for="(task, i) in item" :key="task.id" :elem="task" :index="i" />
   </ul>
 </template>
 
@@ -17,18 +9,7 @@ import TaskItem from "@/components/TaskItem";
 
 export default {
   props: ["item", "msg"],
-  components: { TaskItem },
-  methods: {
-    startedTask(id) {
-      this.$emit("started-task", id);
-    },
-    finishTask(id) {
-      this.$emit("finish-task", id);
-    },
-    removeTask(id, stage) {
-      this.$emit("remove-task", id, stage);
-    }
-  }
+  components: { TaskItem }
 };
 </script>
 

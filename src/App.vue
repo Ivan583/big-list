@@ -33,18 +33,13 @@
     </form>
     <hr />
 
-    <task-list
-      v-if="filteredTasks.length"
-      :item="filteredTasks"
-      @started-task="startTask"
-      @finish-task="finishTask"
-      @remove-task="removeTask"
-    />
+    <task-list v-if="filteredTasks.length" :item="filteredTasks" />
     <h2 v-else>Все задачи выполнены</h2>
   </div>
 </template>
 
 <script>
+import { bus } from "@/main.js";
 import TaskList from "@/components/TaskList.vue";
 import AddTask from "@/components/AddTask.vue";
 
@@ -88,14 +83,7 @@ export default {
       );
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
-    removeTask(id, stage) {
-      if (stage === "completed") {
-        this.tasks = this.tasks.filter(t => t.id != id);
-        localStorage.setItem("tasks", JSON.stringify(this.tasks));
-      } else {
-        alert("Задача не выполнена!");
-      }
-    },
+
     newTask(elem) {
       if (elem != {}) this.tasks.push(elem);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
@@ -140,6 +128,16 @@ export default {
         }
       }
     }
+  },
+
+  created() {
+    bus.$on("remove-task", data => {
+      const id = data.id;
+      if (data.stage === "completed") {
+        this.tasks = this.tasks.filter(t => t.id != id);
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      } else console.log("Задача не выполнена!");
+    });
   },
 
   async mounted() {
