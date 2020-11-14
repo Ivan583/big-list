@@ -61,18 +61,6 @@ export default {
   components: { TaskList, AddTask },
 
   methods: {
-    finishTask(id) {
-      this.tasks = this.tasks.map(el =>
-        el.id === id
-          ? {
-              ...el,
-              stage: "completed"
-            }
-          : el
-      );
-      localStorage.setItem("tasks", JSON.stringify(this.tasks));
-    },
-
     newTask(elem) {
       if (elem != {}) this.tasks.push(elem);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
@@ -135,12 +123,27 @@ export default {
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     });
 
+    bus.$on("finish-task", data => {
+      const id = data.id;
+      const stage = data.stage;
+
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              stage: "completed"
+            }
+          : el
+      );
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    });
+
     bus.$on("remove-task", data => {
       const id = data.id;
       if (data.stage === "completed") {
         this.tasks = this.tasks.filter(t => t.id != id);
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
-      } else console.log("Задача не выполнена!");
+      } else alert("Задача не выполнена!");
     });
   },
 
