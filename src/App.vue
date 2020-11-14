@@ -5,7 +5,7 @@
 
     <form>
       <fieldset>
-        <legend>Фильтры</legend>
+        <legend>Сортировка и фильтры</legend>
         <label>Status</label>
         <select v-model="statusFilter">
           <option value="all">Все</option>
@@ -14,18 +14,7 @@
           <option value="pending">На очереди</option>
         </select>
         <label data-tooltip="введите заголовок или его часть и кликните вне поля">Task</label>
-        <input
-          type="text"
-          class="title"
-          placeholder="наведитесь на label"
-          v-model.lazy="titleFilter"
-        />
-      </fieldset>
-    </form>
-
-    <form>
-      <fieldset>
-        <legend>Сортировка</legend>
+        <input type="text" placeholder="наведитесь на label" v-model.lazy="titleFilter" />
         <div class="sort">
           <div>
             <input type="radio" :value="order.date" v-model="order.method" id="date" />
@@ -199,7 +188,9 @@ label {
 .sort {
   display: flex;
   justify-content: space-around;
+  padding-top: 0.5rem;
 }
+
 [data-tooltip] {
   position: relative;
 }
