@@ -2,7 +2,7 @@
   <li>
     <div>
       <div>
-        <button class="start" @click="$emit('started-task', elem.id)">Start</button>
+        <button class="start" @click="startTask(elem.id, elem.stage)">Start</button>
         <button class="finish" @click="bus.$emit('finish-task', elem.id)">Finish</button>
         <div class="box">
           <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
@@ -38,11 +38,13 @@ export default {
     isCompleted(myStage) {
       return myStage.stage === "completed";
     },
+
+    startTask(id, stage) {
+      bus.$emit("start-task", { id, stage });
+    },
+
     removeTask(id, stage) {
-      bus.$emit("remove-task", {
-        id: id,
-        stage: stage
-      });
+      bus.$emit("remove-task", { id, stage });
     }
   },
   computed: {

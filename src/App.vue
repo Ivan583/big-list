@@ -61,17 +61,6 @@ export default {
   components: { TaskList, AddTask },
 
   methods: {
-    startTask(id) {
-      this.tasks = this.tasks.map(el =>
-        el.id === id
-          ? {
-              ...el,
-              stage: "in work"
-            }
-          : el
-      );
-      localStorage.setItem("tasks", JSON.stringify(this.tasks));
-    },
     finishTask(id) {
       this.tasks = this.tasks.map(el =>
         el.id === id
@@ -131,6 +120,21 @@ export default {
   },
 
   created() {
+    bus.$on("start-task", data => {
+      const id = data.id;
+      const stage = data.stage;
+
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              stage: "in work"
+            }
+          : el
+      );
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    });
+
     bus.$on("remove-task", data => {
       const id = data.id;
       if (data.stage === "completed") {
