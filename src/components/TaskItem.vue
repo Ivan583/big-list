@@ -2,8 +2,8 @@
   <li>
     <div>
       <div>
-        <button class="start" @click="$emit('started-task', elem.id)">Start</button>
-        <button class="finish" @click="$emit('finish-task', elem.id)">Finish</button>
+        <button class="start" @click="startTask(elem.id, elem.stage)">Start</button>
+        <button class="finish" @click="finishTask(elem.id, elem.stage)">Finish</button>
         <div class="box">
           <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
             <strong>{{index + 1}}</strong>
@@ -16,11 +16,12 @@
         <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ elem.description }}</span>
       </div>
     </div>
-    <button class="delete" @click="$emit('remove-task', elem.id, elem.stage)">Delete</button>
+    <button class="delete" @click="removeTask(elem.id, elem.stage)">Delete</button>
   </li>
 </template>
 
 <script>
+import { bus } from "@/main.js";
 export default {
   props: {
     elem: {
@@ -36,6 +37,18 @@ export default {
     },
     isCompleted(myStage) {
       return myStage.stage === "completed";
+    },
+
+    startTask(id, stage) {
+      bus.$emit("start-task", { id, stage });
+    },
+
+    finishTask(id, stage) {
+      bus.$emit("finish-task", { id, stage });
+    },
+
+    removeTask(id, stage) {
+      bus.$emit("remove-task", { id, stage });
     }
   },
   computed: {

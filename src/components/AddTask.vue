@@ -10,7 +10,7 @@
         placeholder="Подготовить договор поставки"
         required
       />
-      <button type="submit">Добавить</button>
+      <button v-show="false" type="submit">Добавить</button>
     </fieldset>
   </form>
 </template>
@@ -61,14 +61,5 @@ input {
 
 .description {
   width: 450px;
-}
-
-button {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: white;
-  background-color: rgb(53, 130, 192);
-  border-radius: 5px;
-  padding: 5px;
 }
 </style>
