@@ -61,18 +61,6 @@ export default {
   components: { TaskList, AddTask },
 
   methods: {
-    finishTask(id) {
-      this.tasks = this.tasks.map(el =>
-        el.id === id
-          ? {
-              ...el,
-              stage: "completed"
-            }
-          : el
-      );
-      localStorage.setItem("tasks", JSON.stringify(this.tasks));
-    },
-
     newTask(elem) {
       if (elem != {}) this.tasks.push(elem);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
