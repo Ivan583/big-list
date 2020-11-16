@@ -29,7 +29,8 @@ export default {
         id: Date.now().toString(),
         title: this.title,
         description: this.description,
-        stage: "pending"
+        stage: "pending",
+        editing: false
       };
       this.$emit("add-task", newTask);
       this.title = "";

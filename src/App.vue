@@ -145,6 +145,37 @@ export default {
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
       } else alert("Задача не выполнена!");
     });
+
+    bus.$on("edit-item", data => {
+      const id = data;
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              editing: true
+            }
+          : el
+      );
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    });
+
+    bus.$on("new-data", data => {
+      const id = data.id;
+      const title = data.title;
+      const description = data.description;
+
+      this.tasks = this.tasks.map(el =>
+        el.id === id
+          ? {
+              ...el,
+              title,
+              description,
+              editing: false
+            }
+          : el
+      );
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    });
   },
 
   async mounted() {
