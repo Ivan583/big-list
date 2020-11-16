@@ -1,22 +1,37 @@
 <template>
   <li>
-    <div>
+    <div v-if="!elem.editing" class="container">
       <div>
-        <button class="start" @click="startTask(elem.id, elem.stage)">Start</button>
-        <button class="finish" @click="finishTask(elem.id, elem.stage)">Finish</button>
-        <div class="box">
-          <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
-            <strong>{{index + 1}}</strong>
-          </span>
-          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ localeDate }}</span>
-          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{elem.title}}</span>
+        <div>
+          <button class="start" @click="startTask(elem.id, elem.stage)">Start</button>
+          <button class="finish" @click="finishTask(elem.id, elem.stage)">Finish</button>
+          <div class="box">
+            <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
+              <strong>{{index + 1}}</strong>
+            </span>
+            <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ localeDate }}</span>
+            <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{elem.title}}</span>
+          </div>
+        </div>
+        <div>
+          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ elem.description }}</span>
         </div>
       </div>
       <div>
-        <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ elem.description }}</span>
+        <button class="edit" @click="editItem(elem.id)">Edit</button>
+        <button class="delete" @click="removeTask(elem.id, elem.stage)">Delete</button>
       </div>
     </div>
-    <button class="delete" @click="removeTask(elem.id, elem.stage)">Delete</button>
+    <div v-else class="editData">
+      <input type="text" class="title" v-model="title" placeholder="ввести и нажать Tab" />
+      <input
+        type="text"
+        class="text"
+        placeholder="ввести и нажать Enter"
+        v-model="description"
+        @keyup.enter="newData(elem.id)"
+      />
+    </div>
   </li>
 </template>
 
@@ -30,11 +45,18 @@ export default {
     },
     index: Number
   },
+  data() {
+    return {
+      title: "",
+      description: ""
+    };
+  },
 
   methods: {
     inProgress(myStage) {
       return myStage.stage === "in work";
     },
+
     isCompleted(myStage) {
       return myStage.stage === "completed";
     },
@@ -49,6 +71,20 @@ export default {
 
     removeTask(id, stage) {
       bus.$emit("remove-task", { id, stage });
+    },
+
+    editItem(id) {
+      bus.$emit("edit-item", id);
+    },
+
+    newData(id) {
+      if (this.title && this.description)
+        bus.$emit("new-data", {
+          id,
+          title: this.title,
+          description: this.description
+        });
+      this.title = this.description = "";
     }
   },
   computed: {
@@ -60,20 +96,27 @@ export default {
 </script>
 
 <style scoped>
-li {
+div {
   display: flex;
+}
+
+.container {
   justify-content: space-between;
   padding: 0.5rem 2rem;
   margin-bottom: 1rem;
   border: 1px solid green;
 }
 
-.work {
-  color: green;
+.editData {
+  margin: -0.5rem 0 0.5rem;
 }
 
-div {
-  display: flex;
+.editData input {
+  border: 2px solid blueviolet;
+}
+
+.work {
+  color: green;
 }
 
 .box {
@@ -94,12 +137,27 @@ button {
   background-color: blue;
 }
 
+.edit {
+  background-color: blueviolet;
+  width: 55px;
+}
+
 .delete {
   background-color: red;
 }
 
 input {
   margin-right: 0.5rem;
+}
+
+.title {
+  margin-left: 410px;
+  width: 260px;
+}
+
+.text {
+  margin-left: 50px;
+  width: 450px;
 }
 
 span {
