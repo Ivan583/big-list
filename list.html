@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TasksList</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <input type="text" placeholder="Add new title" v-model="newTitle" @keyup.enter="addTask()" />
+            <input type="text" placeholder="Add new description" v-model="newDescription" @keyup.enter="addTask()" />
+        </div>
+        <div v-for="(task, index) of tasks" :key="index">
+            <p v-if="!task.editing">
+                {{ task.title }}
+                {{ task.description }}
+                <span>
+                    <button @click="task.editing = true">Edit</button>
+                    <button @click="removeTask(index)">Remove</button>
+                </span>
+            </p>
+            <p v-else>
+                <input type="text" v-model="task.title" @keyup.enter="task.editing = false" />
+                <input type="text" v-model="task.description" @keyup.enter="task.editing = false" />
+            </p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            tasks: [{
+                    title: "продукты",
+                    description: "Купить хлеб",
+                    editing: false
+                },
+                {
+                    title: "животные",
+                    description: "Накормить кота",
+                    editing: false
+                },
+                {
+                    title: "продукты",
+                    description: "Купить молоко",
+                    editing: false
+                }
+            ],
+            newTitle: "",
+            newDescription: ""
+        },
+
+        methods: {
+            addTask() {
+                this.tasks.push({
+                    title: this.newTitle,
+                    description: this.newDescription,
+                    editing: false
+                });
+                this.newTitle = this.newDescription = "";
+            },
+
+            removeTask(index) {
+                this.tasks.splice(index, 1);
+            }
+        }
+    })
+</script>
+
+</html>
