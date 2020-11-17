@@ -23,14 +23,8 @@
       </div>
     </div>
     <div v-else class="editData">
-      <input type="text" class="title" v-model="title" placeholder="ввести и нажать Tab" />
-      <input
-        type="text"
-        class="text"
-        placeholder="ввести и нажать Enter"
-        v-model="description"
-        @keyup.enter="newData(elem.id)"
-      />
+      <input type="text" class="title" v-model="title" @keyup.enter="newData(elem.id)" />
+      <input type="text" class="text" v-model="description" @keyup.enter="newData(elem.id)" />
     </div>
   </li>
 </template>
@@ -84,7 +78,7 @@ export default {
           title: this.title,
           description: this.description
         });
-      this.title = this.description = "";
+      // this.title = this.description = "";
     }
   },
   computed: {

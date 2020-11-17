@@ -156,7 +156,6 @@ export default {
             }
           : el
       );
-      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     });
 
     bus.$on("new-data", data => {
