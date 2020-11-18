@@ -3,28 +3,55 @@
     <div v-if="!elem.editing" class="container">
       <div>
         <div>
-          <button class="start" @click="startTask(elem.id, elem.stage)">Start</button>
-          <button class="finish" @click="finishTask(elem.id, elem.stage)">Finish</button>
+          <button class="start" @click="startTask(elem.id, elem.stage)">
+            Start
+          </button>
+          <button class="finish" @click="finishTask(elem.id, elem.stage)">
+            Finish
+          </button>
           <div class="box">
-            <span class="index" :class="{work: inProgress(elem), done: isCompleted(elem)}">
-              <strong>{{index + 1}}</strong>
+            <span
+              class="index"
+              :class="{ work: inProgress(elem), done: isCompleted(elem) }"
+            >
+              <strong>{{ index + 1 }}</strong>
             </span>
-            <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ localeDate }}</span>
-            <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{elem.title}}</span>
+            <span
+              :class="{ work: inProgress(elem), done: isCompleted(elem) }"
+              >{{ localeDate }}</span
+            >
+            <span
+              :class="{ work: inProgress(elem), done: isCompleted(elem) }"
+              >{{ elem.title }}</span
+            >
           </div>
         </div>
         <div>
-          <span :class="{work: inProgress(elem), done: isCompleted(elem)}">{{ elem.description }}</span>
+          <span :class="{ work: inProgress(elem), done: isCompleted(elem) }">{{
+            elem.description
+          }}</span>
         </div>
       </div>
       <div>
         <button class="edit" @click="editItem(elem.id)">Edit</button>
-        <button class="delete" @click="removeTask(elem.id, elem.stage)">Delete</button>
+        <button class="delete" @click="removeTask(elem.id, elem.stage)">
+          Delete
+        </button>
       </div>
     </div>
     <div v-else class="editData">
-      <input type="text" class="title" v-model="title" @keyup.enter="newData(elem.id)" />
-      <input type="text" class="text" v-model="description" @keyup.enter="newData(elem.id)" />
+      <input
+        type="text"
+        class="title"
+        v-model="title"
+        @keyup.enter="newData(elem.id)"
+      />
+      <input
+        type="text"
+        class="text"
+        v-model="description"
+        @keyup.enter="newData(elem.id)"
+      />
     </div>
   </li>
 </template>
@@ -35,14 +62,15 @@ export default {
   props: {
     elem: {
       type: Object,
-      required: true
+      required: true,
     },
-    index: Number
+    index: Number,
   },
   data() {
+    const { title, description } = this.elem;
     return {
-      title: "",
-      description: ""
+      title,
+      description,
     };
   },
 
@@ -76,16 +104,15 @@ export default {
         bus.$emit("new-data", {
           id,
           title: this.title,
-          description: this.description
+          description: this.description,
         });
-      // this.title = this.description = "";
-    }
+    },
   },
   computed: {
     localeDate() {
       return new Date().toLocaleString();
-    }
-  }
+    },
+  },
 };
 </script>
 
